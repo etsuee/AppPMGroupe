@@ -1,5 +1,4 @@
-export type itemStatus = 'available' | 'maintenance';
-
+export type itemStatus = 'available' | 'maintenance' | 'loan';
 export interface item {
   id: number;
   name: string;

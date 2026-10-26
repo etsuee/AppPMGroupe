@@ -19,8 +19,8 @@ describe('LoanApi', () => {
       itemId: 1,
       borrower: 'John Doe',
       borrowerEmail: 'john.doe@example.com',
-      startDate: '2023-01-01',
-      dueDate: '2023-01-15',
+      startDate: '{{J-3}}',
+      dueDate: '{{J+7}}',
     };
 
     const result = await service.postLoan(loan);

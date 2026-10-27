@@ -5,5 +5,5 @@ export interface Loans {
   borrowerEmail: string;
   startDate: string;
   dueDate: string;
-  returnedAt: null;
+  returnedAt: string | null;
 }

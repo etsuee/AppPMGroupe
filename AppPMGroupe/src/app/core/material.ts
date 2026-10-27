@@ -1,5 +1,5 @@
-import { inject, Injectable, Service, signal } from '@angular/core';
-import { MaterialDto } from '../models/items';
+import { inject, Injectable,  signal } from '@angular/core';
+import { item } from '../models/items';
 import { HttpClient } from '@angular/common/http';
 import { API_ROUTES, API_URL } from './api';
 import { finalize } from 'rxjs';
@@ -9,14 +9,14 @@ import { finalize } from 'rxjs';
 })
 export class Material {
     private readonly axios = inject(HttpClient)
-    readonly items = signal<MaterialDto[]>([])
+    readonly items = signal<item[]>([])
     readonly isLoading = signal(false)
     readonly error = signal<string | null>(null)
 
-    getImes() : void{
+    getItems() : void{
         this.isLoading.set(true)
 
-        this.axios.get<MaterialDto[]>(`${API_URL}${API_ROUTES.items}`)
+        this.axios.get<item[]>(`${API_URL}${API_ROUTES.items}`)
         .pipe(
             finalize(() => this.isLoading.set(false))
         )
@@ -28,6 +28,27 @@ export class Material {
                 this.error.set(
                     err.error?.message ??
                     'Impossible de recuperes la liste de material'
+                )
+            }
+        })
+    }
+
+    getById(id: number) : void{
+        this.isLoading.set(true)
+
+        this.axios.get<item[]>(`${API_URL}${API_ROUTES.items}/${id}`)
+        .pipe(
+            finalize(() => this.isLoading.set(false))
+        )
+        .subscribe({
+            next: (item) => {
+                this.items.set(item)
+                console.log(item)
+            },
+            error: (err) => {
+                this.error.set(
+                    err.error?.message ??
+                    'Impossible de recupere le material'
                 )
             }
         })

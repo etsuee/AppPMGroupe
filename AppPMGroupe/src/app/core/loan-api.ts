@@ -28,4 +28,18 @@ export class LoanApi {
     console.log('Prêt enregistré avec succès :', response);
     return response;
   }
+
+  /** Enregistrer un retour :
+   *@return {Loans} Le prêt retourné
+   *@example { "returnedAt": "2026-11-02" }*/
+  async postLoanReturn(loanId: number): Promise<Loans | undefined> {
+    const loanToReturn: Partial<Loans> = {
+      startDate: new Date().toISOString(),
+    };
+    const response = await firstValueFrom(
+      this.http.post<Loans>(`${LOAN_ENDPOINT}/${loanId}`, loanToReturn),
+    );
+    console.log('Retour enregistré avec succès :', response);
+    return response;
+  }
 }

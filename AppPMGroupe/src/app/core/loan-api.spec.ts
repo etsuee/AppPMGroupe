@@ -30,4 +30,18 @@ describe('LoanApi', () => {
       returnedAt: null,
     });
   });
+
+  it('should post a loan return', async () => {
+    const loanId = 1;
+    const result = await service.postLoanReturn(loanId);
+    expect(result).toEqual({
+      id: 1,
+      itemId: expect.any(Number),
+      borrower: expect.any(String),
+      borrowerEmail: expect.any(String),
+      startDate: expect.any(String),
+      dueDate: expect.any(String),
+      returnedAt: expect.any(String),
+    });
+  });
 });

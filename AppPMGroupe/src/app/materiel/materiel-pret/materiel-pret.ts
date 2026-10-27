@@ -53,10 +53,13 @@ export class MaterielPret {
     },
   );
 
+  protected resetForm(): void {
+    this.materielPretForm().reset({ ...EMPTY_DRAFT });
+  }
   protected async saveForm(): Promise<void> {
     const result = await this.api.postLoan(this.draft());
     if (result) {
-      this.materielPretForm().reset({ ...EMPTY_DRAFT });
+      this.resetForm();
       return;
     }
   }

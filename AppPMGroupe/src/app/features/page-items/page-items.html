@@ -1,0 +1,18 @@
+<main class="app">
+@if (itemsStore.isLoading()) {
+  <p>Chargement...</p>
+}
+
+@if (itemsStore.error(); as error) {
+  <p>{{ error }}</p>
+}
+
+@for (item of itemsStore.items(); track item.id) {
+    <app-card-items 
+        [serialCode]="item.serialNumber"
+        [name]="item.name"
+        [status]="item.status"
+    >
+    </app-card-items>
+}
+</main>

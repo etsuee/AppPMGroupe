@@ -1,19 +1,24 @@
 <header>
-  <nav aria-label="Navigation principale">
-    <a
-      routerLink="/"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      ariaCurrentWhenActive="page"
-      >Accueil</a
-    >
-    <a routerLink="/materiel" routerLinkActive="active" ariaCurrentWhenActive="page"
-      >Liste des materiels</a
-    >
-    <a routerLink="/retards" routerLinkActive="active" ariaCurrentWhenActive="page">Retards</a>
-  </nav>
+  <mat-toolbar>
+    <nav aria-label="Navigation principale">
+      <a
+        matButton
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+        >Accueil</a
+      >
+      <a matButton routerLink="/materiel" routerLinkActive="active" ariaCurrentWhenActive="page"
+        >Matériel</a
+      >
+      <a matButton routerLink="/retards" routerLinkActive="active" ariaCurrentWhenActive="page"
+        >Retards</a
+      >
+    </nav>
+  </mat-toolbar>
 </header>
 
-<main class="container">
+<main id="content" class="container">
   <router-outlet />
 </main>

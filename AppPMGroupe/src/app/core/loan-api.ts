@@ -12,13 +12,13 @@ export class LoanApi {
   private readonly http = inject(HttpClient);
   /** Enregistrer un prêt
    * @param loan - Le prêt à enregistrer
-   * @return Promise<MaterielDraft> - Le prêt enregistré
+   * @return Promise<Loans> - Le prêt enregistré
    */
-  async postLoan(loan: MaterielDraft): Promise<MaterielDraft | undefined> {
+  async postLoan(loan: MaterielDraft): Promise<Loans | undefined> {
     // mapper le MaterielDraft en Loans
     const loanToPost: Loans = {
       id: 0, // L'ID sera généré par le serveur
-      itemId: loan.itemId,
+      itemId: Number(loan.itemId),
       borrower: loan.borrower,
       borrowerEmail: loan.borrowerEmail,
       startDate: new Date().toISOString(),

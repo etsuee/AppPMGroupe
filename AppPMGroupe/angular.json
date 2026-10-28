@@ -24,13 +24,7 @@
                 "input": "public"
               }
             ],
-<<<<<<< HEAD
-            "styles": [
-              "src/styles.css"
-            ]
-=======
             "styles": ["src/material-theme.scss", "src/styles.css"]
->>>>>>> 382cc91 (chore: navbar)
           },
           "configurations": {
             "production": {

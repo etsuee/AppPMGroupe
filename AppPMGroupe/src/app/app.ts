@@ -1,20 +1,19 @@
-import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Material } from './core/material';
-import { UserCard } from './shared/user-card/user-card';
+import { Component, signal } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatToolbar } from '@angular/material/toolbar';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [RouterOutlet, UserCard],
+  imports: [MatToolbar, MatButton, RouterOutlet, RouterLink, RouterLinkActive],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {
   protected readonly title = signal('AppPMGroupe');
-  readonly material = inject(Material)
-  readonly items = this.material.items()
-
-  ngOnInit(): void {
-   this.material.getById(5);
-  }
+  readonly links = [
+    { path: '/', label: 'Tableau de bord', exact: true },
+    { path: '/materiel', label: 'Matériel', exact: false },
+    { path: '/retards', label: 'Retards', exact: false },
+  ];
 }

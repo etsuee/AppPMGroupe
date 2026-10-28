@@ -1,0 +1,17 @@
+<article class="card">
+  <h2>
+    <a [routerLink]="['/materiel', item().id]">{{ item().name }}</a>
+  </h2>
+  <div>
+    <h3>Catégorie</h3>
+    <dd>{{ categoryLabels[item().category] }}</dd>
+  </div>
+  <div>
+    <h3>N° de série</h3>
+    <p>{{ item().serialNumber }}</p>
+  </div>
+  <div>
+    <h3>Disponibilité</h3>
+    <span class="badge badge-{{ itemStatus() }}">{{ availabilityLabels[itemStatus()] }}</span>
+  </div>
+</article>

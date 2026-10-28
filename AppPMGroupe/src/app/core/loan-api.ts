@@ -2,9 +2,10 @@ import { Service, inject } from '@angular/core';
 import { Loans } from '../models/loans';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { MaterielDraft } from '../materiel/materiel-pret/materiel-pret';
+import { MaterielDraft } from '../shared/form-loan-items/form-loan-items';
+import { Material } from './material';
 
-const LOAN_ENDPOINT = 'http://localhost:3000/loans';
+const LOAN_ENDPOINT = 'http://localhost:3000/api/loans';
 
 @Service()
 export class LoanApi {
@@ -20,7 +21,7 @@ export class LoanApi {
       itemId: loan.itemId,
       borrower: loan.borrower,
       borrowerEmail: loan.borrowerEmail,
-      startDate: loan.startDate,
+      startDate: new Date().toISOString(),
       dueDate: loan.dueDate,
       returnedAt: null,
     };

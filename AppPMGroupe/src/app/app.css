@@ -1,0 +1,28 @@
+mat-toolbar {
+  background: #fff;
+  border-bottom: 1px solid #e3e6eb;
+  height: auto;
+  min-height: 4rem;
+  padding: 0.25rem 1rem;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+nav a.active {
+  background: #fff7e6;
+  color: #8a3b0a;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.container {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+main:focus {
+  outline: none;
+}

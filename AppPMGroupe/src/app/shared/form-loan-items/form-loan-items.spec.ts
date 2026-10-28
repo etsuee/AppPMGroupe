@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaterielPret } from './materiel-pret';
+import { FormLoanItems } from './form-loan-items';
 
-describe('MaterielPret', () => {
-  let component: MaterielPret;
-  let fixture: ComponentFixture<MaterielPret>;
+describe('FormLoanItems', () => {
+  let component: FormLoanItems;
+  let fixture: ComponentFixture<FormLoanItems>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MaterielPret],
+      imports: [FormLoanItems],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MaterielPret);
+    fixture = TestBed.createComponent(FormLoanItems);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -6,9 +6,12 @@ import {
   form,
   maxLength,
   minLength,
+  readonly,
   required,
 } from '@angular/forms/signals';
 import { LoanApi } from '../../core/loan-api';
+import { Material } from '../../core/material';
+import { item } from '../../models/items';
 
 export interface MaterielDraft {
   itemId: number;
@@ -28,15 +31,21 @@ const EMPTY_DRAFT: MaterielDraft = {
 
 @Component({
   imports: [FormField, FormRoot],
-  selector: 'app-materiel-pret',
-  styleUrl: './materiel-pret.css',
-  templateUrl: './materiel-pret.html',
+  selector: 'app-form-loan-items',
+  styleUrl: './form-loan-items.css',
+  templateUrl: './form-loan-items.html',
 })
-export class MaterielPret {
+export class FormLoanItems {
   private readonly api = inject(LoanApi);
   private readonly draft = signal<MaterielDraft>({ ...EMPTY_DRAFT });
+  private readonly material = inject(Material);
+  readonly items = signal<item[]>([]);
 
-  readonly materielPretForm = form(
+  ngOnInit(): void {
+    this.material.getItems();
+  }
+
+  readonly FormLoanItemsForm = form(
     this.draft,
     (path) => {
       required(path.itemId, { message: "L'ID de l'item est obligatoire." });
@@ -54,7 +63,7 @@ export class MaterielPret {
   );
 
   protected resetForm(): void {
-    this.materielPretForm().reset({ ...EMPTY_DRAFT });
+    this.FormLoanItemsForm().reset({ ...EMPTY_DRAFT });
   }
   protected async saveForm(): Promise<void> {
     const result = await this.api.postLoan(this.draft());

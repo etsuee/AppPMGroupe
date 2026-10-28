@@ -8,25 +8,27 @@ import {
   minLength,
   readonly,
   required,
+  minDate,
+  maxDate,
 } from '@angular/forms/signals';
 import { LoanApi } from '../../core/loan-api';
 import { Material } from '../../core/material';
 import { item } from '../../models/items';
 
 export interface MaterielDraft {
-  itemId: number;
+  itemId: string;
   borrower: string;
   borrowerEmail: string;
   startDate: string;
-  dueDate: string;
+  dueDate: Date;
 }
 
 const EMPTY_DRAFT: MaterielDraft = {
-  itemId: 0,
+  itemId: '',
   borrower: '',
   borrowerEmail: '',
   startDate: '',
-  dueDate: '',
+  dueDate: new Date(),
 };
 
 @Component({
@@ -48,12 +50,19 @@ export class FormLoanItems {
   readonly FormLoanItemsForm = form(
     this.draft,
     (path) => {
-      required(path.itemId, { message: "L'ID de l'item est obligatoire." });
+      required(path.itemId, { message: 'Veuillez sélectionner un matériel.' });
       required(path.borrower, { message: 'Le prénom est obligatoire.' });
       required(path.borrowerEmail, { message: "L'email est obligatoire." });
       email(path.borrowerEmail, { message: "L'email n'est pas valide." });
       minLength(path.borrower, 2, { message: 'Le prénom doit contenir au moins 2 caractères.' });
       maxLength(path.borrower, 50, { message: 'Le prénom ne peut pas dépasser 50 caractères.' });
+      required(path.dueDate, { message: 'La date de retour est obligatoire.' });
+      minDate(path.dueDate, new Date(), {
+        message: 'La date de retour ne peut pas être dans le passé.',
+      });
+      maxDate(path.dueDate, new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), {
+        message: 'Vous ne pouvez pas emprunter un matériel pour plus de 14 jours.',
+      });
     },
     {
       submission: {
